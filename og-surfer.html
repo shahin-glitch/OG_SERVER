@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>OG SURFER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="gameCanvas"></canvas>
+  <div id="vignette"></div>
+  <div id="flash"></div>
+  <div id="hitFlash"></div>
+  <div id="touchZones"><div id="tzLeft"></div><div id="tzRight"></div></div>
+
+  <div class="banner" id="mapBanner"></div>
+  <div class="ach-toast" id="achToast"></div>
+
+  <div id="hud">
+    <div id="scoreWrap">
+      <div class="label">DISTANCE</div>
+      <div class="value" id="scoreVal">0</div>
+      <div id="coinHud">🪙 <span id="runCoins">0</span></div>
+    </div>
+    <div id="lives">
+      <div class="life" id="life0"></div>
+      <div class="life" id="life1"></div>
+      <div class="life" id="life2"></div>
+    </div>
+    <div id="powerups">
+      <div class="pwr" id="pwrShield">🛡 SHIELD</div>
+      <div class="pwr" id="pwrMagnet">🧲 MAGNET</div>
+      <div class="pwr" id="pwrSpeed">⚡ SPEED</div>
+    </div>
+    <div id="runQuestHud">
+      <div class="rq-title">RUN TASK</div>
+      <div class="rq-task" id="runQuestText">Collect 8 coins</div>
+      <div class="rq-bar-wrap"><div class="rq-bar" id="runQuestBar" style="width:0%"></div></div>
+    </div>
+    <div id="comboHud"><span id="comboVal">x2</span><div class="combo-sub">COMBO</div></div>
+    <div id="levelHud">
+      <span class="lvl-label" id="levelLabel">LV 1</span>
+      <div class="lvl-bar-wrap"><div class="lvl-bar" id="levelBar" style="width:0%"></div></div>
+    </div>
+    <div id="speedbar"><div id="speedfill"></div></div>
+    <button id="muteBtn" title="Toggle sound">🔊</button>
+  </div>
+
+  <div class="overlay" id="startOverlay">
+    <h1 class="title">OG SURFER</h1>
+    <div class="subtitle" id="dailyMapLabel">Today's Map: SUNSET BAY</div>
+    <div class="story-line" id="storyLine">The ocean is cursed. Collect magic pearls to restore it. 🦪 0 / 100</div>
+
+    <div class="chapter-progress" id="chapterDots"></div>
+
+    <div class="panel" id="questPanel">
+      <h3>ISLAND QUESTS <span class="badge" id="questBadge">0/5</span></h3>
+      <div id="questList"></div>
+    </div>
+
+    <div class="panel" id="missionsPanel">
+      <h3>DAILY MISSIONS <span class="badge" id="missionBadge">0/4</span></h3>
+      <div id="missionsList"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="playBtn">PLAY</button>
+      <button class="btn secondary" id="shopBtn">SHOP 🪙 <span id="totalCoins">0</span></button>
+      <button class="btn secondary" id="achBtn">TASKS</button>
+    </div>
+    <div class="controls-hint">
+      <div class="desktopOnly"><b>A / D</b> or <b>&larr; / &rarr;</b> — lane &nbsp;·&nbsp; <b>SPACE</b> — jump</div>
+      <div class="mobileOnly">Swipe <b>left/right</b> — lane &nbsp;·&nbsp; Swipe <b>up</b> or <b>tap</b> — jump</div>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="shopOverlay">
+    <h1 class="title" style="font-size:clamp(1.8rem,7vw,3rem);">SHOP</h1>
+    <div class="subtitle">🪙 <span id="shopCoins">0</span> coins</div>
+    <div class="shop-grid" id="shopGrid"></div>
+    <button class="btn secondary" id="shopBackBtn" style="margin-top:18px;">BACK</button>
+  </div>
+
+  <div class="overlay hidden" id="achOverlay">
+    <h1 class="title" style="font-size:clamp(1.8rem,7vw,3rem);">TASKS</h1>
+    <div class="subtitle">Complete everything to restore the ocean</div>
+    <div class="panel" style="max-height:50vh;overflow-y:auto;">
+      <h3>ISLAND QUESTS</h3>
+      <div id="achQuestList"></div>
+      <h3 style="margin-top:14px;">DAILY MISSIONS</h3>
+      <div id="achMissionList"></div>
+      <h3 style="margin-top:14px;">ACHIEVEMENTS</h3>
+      <div id="achList"></div>
+    </div>
+    <button class="btn secondary" id="achBackBtn" style="margin-top:14px;">BACK</button>
+  </div>
+
+  <div class="overlay hidden" id="overOverlay">
+    <h1 class="title" style="font-size:clamp(2rem,8vw,3.4rem);">WIPED OUT</h1>
+    <div class="gameoverScore" id="finalScore">Distance: 0m</div>
+    <div class="gameoverBest" id="bestScore">Best: 0m</div>
+    <div class="gameoverCoins" id="earnedCoins">+0 coins earned</div>
+    <div class="run-summary" id="runSummary"></div>
+    <div class="btn-row">
+      <button class="btn" id="retryBtn">SURF AGAIN</button>
+      <button class="btn secondary" id="shareBtn">SHARE SCORE</button>
+    </div>
+  </div>
+</div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
